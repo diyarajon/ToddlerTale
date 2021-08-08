@@ -1,0 +1,55 @@
+<!doctype html>
+<html>
+    <head>
+        
+        <script src='https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.4/socket.io.js'></script>
+        
+        <style>
+
+            #text {
+                align-items: center;
+            }
+        
+        </style>
+        
+    </head>
+    <body>
+        
+        <h1>ToddlerTale</h1>
+
+        <div id="sample"></div>
+        <div id="text"></div>
+        
+        <script>
+
+var inOrOut;
+
+            var socket = io();
+
+socket.on('data', function(data) {
+    
+    console.log(data);
+    
+    
+    if(data > 50){
+        if(inOrOut == 1){
+            document.getElementById('text').style.color = "green";
+            document.getElementById('text').innerHTML = "Your child is in their room"; 
+        }
+    }
+    if(data <= 50){
+        if(inOrOut == 1){
+            document.getElementById('text').style.color = "red";
+            document.getElementById('text').innerHTML = "Your child is not in their room"; 
+            inOrOut = 0; 
+        }else{
+            document.getElementById('text').style.color = "green";
+            document.getElementById('text').innerHTML = "Your child is in their room";
+            inOrOut = 1; 
+        } 
+    }
+});
+        </script>
+        
+    </body>
+</html>
